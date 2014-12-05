@@ -6,12 +6,23 @@
 'use strict';
 
 var path = require( 'path' ),
-	files = [
-		path.join( require.resolve( 'sinon' ), '../../pkg/sinon.js' ),
-	];
+	sinonPath = path.join( require.resolve( 'sinon' ), '../../pkg/sinon.js' ).split( path.sep ).join( '/' ),
+	sinonIEPath = path.join( require.resolve( 'sinon' ), '../../pkg/sinon-ie.js' ).split( path.sep ).join( '/' );
 
 module.exports = {
-	name: 'bender-framework-sinon',
-	files: files,
-	include: files
+	name: 'bender-pagebuilder-sinon',
+
+	build: function( data ) {
+		data.parts.push( '<head><script src="' + path.join( '/plugins', sinonPath ) + '"></script></head>' );
+
+		data.parts.push(
+			'<head><script>' +
+				'if( navigator.userAgent.toLowerCase().indexOf( \'trident\' ) > -1 )' +
+					'document.write( \'\<scr\' + \'ipt src="' + path.join( '/plugins', sinonIEPath ) + '"\>\<\/scr\' + \'ipt\> \' )' +
+			'</script></head>' );
+
+		return data;
+	},
+
+	files: [ sinonPath, sinonIEPath ]
 };
