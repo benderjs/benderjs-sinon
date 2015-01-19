@@ -11,7 +11,7 @@ var path = require( 'path' ),
 	];
 
 module.exports = {
-	name: 'bender-framework-sinon',
+	name: 'bender-sinon',
 	files: files,
 	include: files
 };
