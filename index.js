@@ -11,13 +11,10 @@ var path = require( 'path' ),
 
 module.exports = {
 	name: 'bender-sinon',
-	files: [ sinonPath, sinonIEPath ],
 
 	attach: function() {
-		module.exports.build = build;
 		this.pagebuilders.add( 'sinon', build, this.pagebuilders.getPriority( 'html' ) - 1 );
-
-		this.plugins.addFiles( module.exports.files );
+		this.plugins.addFiles( [ sinonPath, sinonIEPath ] );
 
 		function build( data ) {
 			data.parts.push(
