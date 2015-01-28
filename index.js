@@ -14,7 +14,10 @@ module.exports = {
 	files: [ sinonPath, sinonIEPath ],
 
 	attach: function() {
-		var bender = this;
+		module.exports.build = build;
+		this.pagebuilders.add( 'sinon', build, this.pagebuilders.getPriority( 'html' ) - 1 );
+
+		this.plugins.addFiles( module.exports.files );
 
 		function build( data ) {
 			data.parts.push(
@@ -29,11 +32,5 @@ module.exports = {
 
 			return data;
 		}
-
-		module.exports.build = build;
-
-		var priority = bender.pagebuilders.getPriority( 'html' );
-
-		bender.pagebuilders.add( 'sinon', build, priority - 1 );
 	}
 };
