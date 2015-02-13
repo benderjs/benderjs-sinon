@@ -2,7 +2,7 @@
 	"name": "benderjs-sinon",
 	"version": "0.2.2",
 	"description": "Sinon.js adapter for Bender.js",
-	"main": "index.js",
+	"main": "lib/index.js",
 	"scripts": {
 		"lint": "jscs . && jshint index.js"
 	},
@@ -23,7 +23,7 @@
 	},
 	"homepage": "https://github.com/benderjs/benderjs-sinon",
 	"dependencies": {
-		"sinon": "^1.10.3"
+		"sinon": "~1.12.2"
 	},
 	"devDependencies": {
 		"jscs": "^1.6.1",
