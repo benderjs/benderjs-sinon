@@ -22,7 +22,7 @@ module.exports = {
 			data.parts.push(
 				`<head>
 					<script src="${ prefixedSinonPath }"></script>
-					// IE8- need additional care to make timers and XHR work.
+					<!-- IE8- need additional care to make timers and XHR work. -->
 					<!--[if lte IE 8]>
 						<script src="${ prefixedSinonIEPath }"></script>
 					<![endif]-->
