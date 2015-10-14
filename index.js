@@ -7,7 +7,9 @@
 
 var path = require( 'path' ),
 	sinonPath = path.join( require.resolve( 'sinon' ), '../../pkg/sinon.js' ),
-	sinonIEPath = path.join( require.resolve( 'sinon' ), '../../pkg/sinon-ie.js' );
+	sinonIEPath = path.join( require.resolve( 'sinon' ), '../../pkg/sinon-ie.js' ),
+	prefixedSinonPath = path.join( '/plugins', sinonPath ).split( path.sep ).join( '/' ),
+	prefixedSinonIEPath = path.join( '/plugins', sinonIEPath ).split( path.sep ).join( '/' );
 
 module.exports = {
 	name: 'bender-sinon',
@@ -18,13 +20,26 @@ module.exports = {
 
 		function build( data ) {
 			data.parts.push(
-				'<head>' +
-					'<script src="' + path.join( '/plugins', sinonPath ).split( path.sep ).join( '/' ) + '"></script>' +
+				`<head>
+					<script src="${ prefixedSinonPath }"></script>
 					// IE8- need additional care to make timers and XHR work.
-					'<!--[if lte IE 8]>' +
-						'<script src="' + path.join( '/plugins', sinonIEPath ).split( path.sep ).join( '/' ) + '"></script>' +
-					'<![endif]-->' +
-				'</head>'
+					<!--[if lte IE 8]>
+						<script src="${ prefixedSinonIEPath }"></script>
+					<![endif]-->
+					<script>
+						// Expose Sinon if we are in an AMD environment.
+						if ( typeof define == 'function' && define.amd && typeof sinon == 'undefined' ) {
+							var done = bender.defer();
+
+							( function() {
+								require( [ 'sinon' ], function( sinon ) {
+									window.sinon = sinon;
+									done();
+								} );
+							} )();
+						}
+					</script>
+				</head>`
 			);
 
 			return data;
