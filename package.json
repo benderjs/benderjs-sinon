@@ -1,6 +1,6 @@
 {
 	"name": "benderjs-sinon",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"description": "Sinon.js adapter for Bender.js",
 	"main": "index.js",
 	"scripts": {
