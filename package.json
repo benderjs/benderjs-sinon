@@ -23,10 +23,13 @@
 	},
 	"homepage": "https://github.com/benderjs/benderjs-sinon",
 	"dependencies": {
-		"sinon": "~1.10.3"
+		"sinon": "^1.17.0"
 	},
 	"devDependencies": {
-		"jscs": "^1.6.1",
+		"jscs": "^2.3.0",
 		"jshint": "^2.5.5"
+	},
+	"engines": {
+		"node": ">=4.0.0"
 	}
 }
