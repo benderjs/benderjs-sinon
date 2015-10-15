@@ -15,7 +15,7 @@ module.exports = {
 	name: 'bender-sinon',
 
 	attach: function() {
-		this.pagebuilders.add( 'sinon', build, this.pagebuilders.getPriority( 'html' ) - 1 );
+		this.pagebuilders.add( 'sinon', build );
 		this.plugins.addFiles( [ sinonPath, sinonIEPath ] );
 
 		function build( data ) {
